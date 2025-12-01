@@ -1,0 +1,19 @@
+/* Tüm kapsayıcı ekranı doldursun */
+.app-container {
+  width: 100%;
+  height: 100vh; /* Viewport Height (Tam Ekran) */
+  border: 1px solid #555;
+}
+
+/* Sol taraf (Liste) */
+mat-drawer {
+  width: 30%; /* Genişliği sabitledik, istersen % verebilirsin */
+  padding: 0;
+  border-right: 1px solid #ccc;
+}
+
+/* Sağ taraf (Detay) */
+mat-drawer-content {
+  padding: 20px;
+  background-color: #fff;
+}

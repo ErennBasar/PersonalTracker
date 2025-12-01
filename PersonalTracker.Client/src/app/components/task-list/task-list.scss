@@ -1,0 +1,152 @@
+.example-container {
+  width: 100%;
+  height: 100vh; /* Yükseklik tam ekran */
+  margin: 10px;
+  //border: 1px solid #555;
+  /* The background property is added to clearly distinguish the borders between drawer and main
+     content */
+  background: #eee;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Kartlar arası boşluk */
+}
+
+/* --- KART TASARIMI --- */
+.task-card {
+  background-color: #fff;
+  border-radius: 12px;       /* Kenarları yuvarlat */
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e0e0e0;
+  //border-left: 5px solid #ff9800;
+  border-left-width: 5px;
+  border-left-style: solid;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Durum: Rahat (5 günden fazla var) veya Tamamlanmış */
+.border-green {
+  border-left-color: #4caf50 !important;
+}
+
+/* Durum: Dikkat (3 ile 5 gün arası) */
+.border-orange {
+  border-left-color: #ff9800 !important;
+}
+
+/* Durum: Acil veya Gecikmiş (< 3 gün) */
+.border-red {
+  border-left-color: #f44336 !important;
+}
+
+.task-card:hover {
+  background-color: #ebebeb; /* Üzerine gelince hafif koyulaşsın */
+}
+
+/* Seçili olan kartın kenarını mavi yapalım ki belli olsun */
+.task-card.selected {
+  background-color: #dbeafe; /* Hafif mavi arka plan */
+}
+
+.task-card.border-red.selected {
+  border-color: #f44336;
+}
+
+/* Eğer kart TURUNCU ise ve SEÇİLDİYSE -> Üst, Sağ, Alt kenarlar da Turuncu olsun */
+.task-card.border-orange.selected {
+  border-color: #ff9800;
+}
+
+/* Eğer kart YEŞİL ise ve SEÇİLDİYSE -> Üst, Sağ, Alt kenarlar da Yeşil olsun */
+.task-card.border-green.selected {
+  border-color: #4caf50;
+}
+
+/* --- SATIR DÜZENLERİ --- */
+.card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.top-row {
+  margin-bottom: 5px;
+}
+
+/* --- METİN KIRPMA (ELLIPSIS) SİHRİ --- */
+.task-header {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+
+  /* Bu 3 satır, metin sığmazsa ... koyar */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  flex-grow: 1; /* Boşluğu doldur */
+  margin-right: 5px;
+}
+
+.task-body {
+  font-size: 0.9em;
+  color: #666;
+
+  /* Metin kırpma */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  flex-grow: 1; /* Ortadaki geniş alanı kapla */
+  margin: 0 10px; /* Tarih ve Buton ile mesafe */
+}
+
+/* --- DİĞER DETAYLAR --- */
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0; /* Sağ taraf sıkışmasın */
+}
+
+.hours-badge {
+  background-color: #2196f3; /* Mavi */
+  color: white;
+  font-size: 0.75em;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.check-icon {
+  color: #4caf50; /* Yeşil tik */
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.task-date {
+  font-size: 0.85em;
+  font-weight: bold;
+  color: #555;
+  background-color: #cfd8dc; /* Hafif mavi-gri kutucuk */
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0; /* Tarih sıkışmasın */
+}
+
+.delete-btn {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  flex-shrink: 0;
+}
+
+.delete-btn mat-icon {
+  font-size: 20px;
+}

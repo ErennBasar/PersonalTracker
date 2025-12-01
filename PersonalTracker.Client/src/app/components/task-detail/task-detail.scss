@@ -1,0 +1,150 @@
+.detail-container {
+  padding: 20px;
+}
+
+/* ANA GÖREV KARTI */
+.master-card {
+  background-color: white;
+  border-left: 5px solid #3f51b5; /* Ana kart olduğu için Mavi (Primary) yaptım, istersen turuncu kalabilir */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Biraz daha belirgin gölge */
+  padding: 20px;
+  border-radius: 8px;
+  //margin-bottom: 20px;
+}
+
+/* Tarih alanı için */
+.master-row-split {
+  margin-bottom: 15px;
+}
+
+/* Material Form Field'ın içindeki fontları özelleştirme */
+::ng-deep .master-card .mat-mdc-form-field-subscript-wrapper {
+  display: none; /* Alt kısımdaki boşluğu siler (compact görünüm) */
+}
+
+/* Scroll edilebilir kutu */
+.logs-scroll-container {
+  height: 600px; /* Sabit yükseklik */
+  overflow-y: auto; /* İçerik taşarsa dikey kaydırma çubuğu çıkar */
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Turuncu Kutu Tasarımı */
+.log-card {
+  //background-color: #ff9800; /* Turuncu */
+  background-color: white;
+  border-left: 5px solid #ff9800;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Hafif gölge */
+  //color: white;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  //justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.log-date {
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-align: center;
+  min-width: 50px;
+  line-height: 1.2;
+}
+
+//.log-input-area input {
+//  padding: 5px;
+//  border-radius: 4px;
+//  border: none;
+//  width: 60px;
+//}
+
+/* Açıklama Kısmı (Esnek alan) */
+.log-description {
+  flex-grow: 1; /* Kalan tüm boşluğu kapla */
+}
+
+.desc-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.desc-input:focus {
+  border-color: #ff9800; /* Tıklayınca turuncu olsun */
+}
+
+/* Saat Kısmı */
+.log-hours {
+  display: flex;
+  flex-direction: column; /* Label üstte input altta olsun */
+  align-items: center;
+  min-width: 60px;
+}
+
+.log-hours label {
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.hour-input {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.header-row-container {
+  display: flex;
+  align-items: center; /* Dikeyde ortala */
+  gap: 20px; /* Aralarında boşluk */
+  margin-bottom: 15px;
+}
+
+.header-field {
+  flex-grow: 1;
+}
+
+.status-checkbox {
+  /* Biraz daha belirgin olsun */
+  transform: scale(1.1);
+  font-weight: bold;
+  color: #555;
+}
+
+::ng-deep .mat-mdc-checkbox-checked .mdc-form-field {
+  color: #4caf50 !important;
+}
+
+/* Yan Yana Dizme Kutusu */
+.split-container {
+  display: flex;       /* Yan yana diz */
+  gap: 20px;           /* İki panel arası boşluk */
+  align-items: flex-start; /* Yukarıdan hizala */
+  flex-wrap: wrap;     /* Ekran çok küçülürse alt alta geçsin (Responsive) */
+}
+
+/* Sol Panel (Detaylar) */
+.left-panel {
+  flex: 1;             /* Mevcut alanın 1 birimini al (%50 gibi davranır) */
+  min-width: 300px;    /* Çok küçülmesin */
+}
+
+/* Sağ Panel (Loglar) */
+.right-panel {
+  flex: 1;             /* Bu da 1 birim alsın (Eşit bölüşürler) */
+  min-width: 300px;
+}

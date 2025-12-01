@@ -1,0 +1,29 @@
+<mat-drawer-container class="app-container" autosize>
+
+  <mat-drawer mode="side" opened>
+    <app-task-list (taskSelected)="onTaskSelect($event)"></app-task-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div *ngIf="selectedTaskId; else calendarView" style="padding: 20px;">
+
+      <button mat-stroked-button (click)="backToCalendar()" style="margin-bottom: 10px;">
+        <mat-icon>arrow_back</mat-icon> Takvime Dön
+      </button>
+
+
+
+      <app-task-detail [taskId]="selectedTaskId"></app-task-detail>
+    </div>
+
+    <ng-template #calendarView>
+      <div style="padding: 10px; height: 95%;">
+
+        <app-task-calendar [tasks]="allTasks"></app-task-calendar>
+
+      </div>
+    </ng-template>
+  </mat-drawer-content>
+
+</mat-drawer-container>
+

@@ -1,0 +1,129 @@
+<div *ngIf="selectedTask" class="detail-container">
+
+  <div class="split-container">
+
+    <div class="left-panel">
+  <div class="master-card">
+
+<!--    <div class="master-row">-->
+<!--      <mat-form-field appearance="outline" style="width: 100%;" subscriptSizing="dynamic">-->
+<!--        <mat-label>Görev Başlığı</mat-label>-->
+<!--        <input matInput [(ngModel)]="selectedTask.header" style="font-weight: bold; font-size: 1.2em;">-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+    <div class="header-row-container">
+
+      <mat-form-field appearance="outline" class="header-field" subscriptSizing="dynamic">
+        <mat-label>Görev Başlığı</mat-label>
+        <input matInput [(ngModel)]="selectedTask.header" style="font-weight: bold; font-size: 1.2em;">
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="selectedTask.isCompleted" color="primary" class="status-checkbox">
+        Tamamlandı
+      </mat-checkbox>
+
+    </div>
+
+    <div class="master-row-split">
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="date-field">
+        <mat-label>Tarih Aralığı</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate [(ngModel)]="selectedTask.startDate" placeholder="Başlangıç">
+          <input matEndDate [(ngModel)]="selectedTask.endDate" placeholder="Bitiş">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="master-row">
+      <mat-form-field appearance="outline" style="width: 100%;" subscriptSizing="dynamic">
+        <mat-label>Açıklama / Notlar</mat-label>
+        <textarea matInput
+                  [(ngModel)]="selectedTask.body"
+                  rows="3"
+                  placeholder="Görev hakkında detaylar..."></textarea>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+      <div style="margin-top: 30px;">
+        <app-task-charts
+          [currentTask]="selectedTask"
+          [allTasks]="allTasks"
+          [showTrend]="false"
+          [showSummary]="true">
+        </app-task-charts>
+      </div>
+
+    </div>
+    <div class="right-panel">
+  <h3>Günlük Çalışma Kayıtları</h3>
+
+  <div class="logs-scroll-container">
+
+    <div *ngFor="let log of selectedTask.logs" class="log-card">
+
+<!--      <div class="log-date">-->
+<!--        {{ log.logTime | date:'dd MMM yyyy' }} <br>-->
+<!--        <small>{{ log.logTime | date:'EEEE' }}</small> -->
+<!--      </div>-->
+      <div class="log-date">
+        <span style="font-size: 1.1em;">{{ log.logTime | date:'dd' }}</span>
+        <small>{{ log.logTime | date:'MMM' }}</small> <br>
+        <small style="opacity: 0.8;">{{ log.logTime | date:'EEE' }}</small>
+      </div>
+
+      <div class="log-description">
+        <input type="text"
+               [(ngModel)]="log.description"
+               placeholder="Bugün neler yaptın? Not ekle..."
+               class="desc-input">
+      </div>
+
+<!--      <div class="log-input-area">-->
+<!--        <label>Süre (Saat):</label>-->
+<!--        <input type="number" [(ngModel)]="log.hoursSpent" min="0" step="0.5">-->
+<!--      </div>-->
+      <div class="log-hours">
+        <label>Saat:</label>
+        <input type="number"
+               [(ngModel)]="log.hoursSpent"
+               min="0" step="0.5"
+               class="hour-input">
+      </div>
+
+    </div>
+
+  </div>
+      <div class="actions" style="margin-top: 20px; text-align: right;">
+
+        <button mat-raised-button
+                color="primary"
+                (click)="saveChanges()"
+                [disabled]="isSaving"> {{ isSaving ? 'Kaydediliyor...' : 'Değişiklikleri Kaydet' }}
+        </button>
+      </div>
+    </div>
+
+<!--  <div class="actions">-->
+<!--    <button mat-raised-button color="primary" (click)="saveLogs()">Değişiklikleri Kaydet</button>-->
+<!--  </div>-->
+
+    </div>
+
+  <app-task-charts
+    [currentTask]="selectedTask"
+    [allTasks]="allTasks"
+    [showTrend]="true"
+    [showSummary]="false">
+  </app-task-charts>
+
+</div>
+
+<div *ngIf="!selectedTask" class="empty-state">
+  <p>Detaylarını görmek için soldaki listeden bir görev seçin.</p>
+</div>

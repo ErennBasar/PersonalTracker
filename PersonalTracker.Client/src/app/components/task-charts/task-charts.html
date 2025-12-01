@@ -1,0 +1,52 @@
+<div class="charts-container" *ngIf="currentTask">
+
+  <div class="chart-card wide " *ngIf="showTrend">
+    <h4>Günlük Çalışma Trendi</h4>
+
+    <div class="scrollable-chart-wrapper">
+
+      <ngx-charts-line-chart
+        [view]="[chartWidth, 300]"
+        [scheme]="lineChartScheme"
+        [results]="lineChartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Tarih"
+        yAxisLabel="Saat">
+      </ngx-charts-line-chart>
+
+    </div>
+  </div>
+
+  <div class="charts-row mini-charts-layout" *ngIf="showSummary">
+
+    <div class="chart-card">
+      <h4>Toplam Efor Payı</h4>
+      <div class="chart-wrapper padded-chart">
+        <ngx-charts-pie-chart
+          [results]="pieChartData"
+          [doughnut]="true"
+          [labels]="true"
+          [customColors]="customColors">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h4>Ortalama Kıyaslaması</h4>
+      <div class="chart-wrapper padded-chart">
+        <ngx-charts-bar-vertical
+          [results]="barChartData"
+          [xAxis]="true"
+          [yAxis]="true"
+          [showDataLabel]="true"
+          [barPadding]="100">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+
+  </div>
+
+</div>

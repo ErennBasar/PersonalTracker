@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Yeni Görev Planla</h2>
+
+<mat-dialog-content>
+  <p>Lütfen görev için başlangıç ve bitiş tarihlerini seçin.</p>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Tarih Aralığı</mat-label>
+
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input matStartDate formControlName="start" placeholder="Başlangıç">
+      <input matEndDate formControlName="end" placeholder="Bitiş">
+    </mat-date-range-input>
+
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+
+    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Geçersiz başlangıç</mat-error>
+    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Geçersiz bitiş</mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">İptal</button>
+
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="range.invalid">
+    Oluştur
+  </button>
+</mat-dialog-actions>
+

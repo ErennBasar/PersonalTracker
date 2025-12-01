@@ -1,0 +1,111 @@
+ <div class="container" style="padding: 10px;">
+
+<!--      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">-->
+<!--        <h2>Yapılacaklar Listesi</h2>-->
+<!--        <button mat-raised-button color="primary" (click)="openAddDialog()">-->
+<!--          <mat-icon>add</mat-icon> Yeni Görev-->
+<!--        </button>-->
+<!--      </div>-->
+
+     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+       <h3>Görevler</h3>
+       <button mat-mini-fab color="primary" (click)="openAddDialog()" matTooltip="Yeni Görev Ekle">
+         <mat-icon>add</mat-icon>
+       </button>
+     </div>
+
+   <div class="task-list">
+
+     <div *ngFor="let task of tasks"
+          class="task-card"
+          [ngClass]="getLeftBorderColor(task)"
+          (click)="selectTask(task.id)"
+          [class.selected]="selectedTaskId === task.id">
+       <div class="card-row top-row">
+
+       <div class="task-header" matTooltip="{{task.header}}">
+         {{ task.header }}
+       </div>
+
+       <div class="task-meta">
+         <span class="hours-badge" *ngIf="task.hoursTaken > 0">{{ task.hoursTaken }}h</span>
+
+         <mat-icon *ngIf="task.isCompleted" class="check-icon">check_circle</mat-icon>
+       </div>
+
+     </div>
+
+       <div class="card-row bottom-row">
+
+         <div class="task-date">
+           {{ task.createdDate | date:'dd.MM.yy' }}
+         </div>
+
+         <div class="task-body" matTooltip="{{task.body}}">
+           {{ task.body }}
+         </div>
+
+         <button mat-icon-button color="warn" class="delete-btn" (click)="onDelete(task.id); $event.stopPropagation()">
+           <mat-icon>cancel</mat-icon> </button>
+
+       </div>
+
+     </div>
+
+   </div>
+
+<!--      <table mat-table [dataSource]="tasks" class="mat-elevation-z8" style="width: 100%;">-->
+
+<!--        <ng-container matColumnDef="createdDate">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Tarih </th>-->
+<!--          <td mat-cell *matCellDef="let task"> {{ task.createdDate | date:'dd.MM.yyyy' }} </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="header">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Başlık </th>-->
+<!--          <td mat-cell *matCellDef="let task"> {{ task.header }} </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="body">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Açıklama </th>-->
+<!--          <td mat-cell *matCellDef="let task"> {{ task.body }} </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="hoursTaken">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Süre </th>-->
+<!--          <td mat-cell *matCellDef="let task"> {{ task.hoursTaken }} Saat </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="isCompleted">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Durum </th>-->
+<!--          <td mat-cell *matCellDef="let task">-->
+<!--            <span [style.color]="task.isCompleted ? 'green' : 'red'" style="font-weight: bold;">-->
+<!--              {{ task.isCompleted ? 'Tamam' : 'Bekliyor' }}-->
+<!--            </span>-->
+<!--          </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="actions">-->
+<!--          <th mat-header-cell *matHeaderCellDef> İşlemler </th>-->
+<!--          <td mat-cell *matCellDef="let task">-->
+<!--            <button mat-icon-button color="primary" (click)="onEdit(task.id)">-->
+<!--              <mat-icon>edit</mat-icon>-->
+<!--            </button>-->
+<!--            <button mat-icon-button color="warn" (click)="onDelete(task.id)">-->
+<!--              <mat-icon>delete</mat-icon>-->
+<!--            </button>-->
+<!--          </td>-->
+<!--        </ng-container>-->
+
+<!--        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+
+<!--        <tr mat-row *matRowDef="let row; columns: displayedColumns;"-->
+<!--            (click)="selectTask(row.id)"-->
+<!--            style="cursor: pointer; transition: background-color 0.2s;"-->
+<!--            onmouseover="this.style.backgroundColor='#f5f5f5';"-->
+<!--            onmouseout="this.style.backgroundColor='white';">-->
+<!--        </tr>-->
+
+<!--      </table>-->
+    </div>
+

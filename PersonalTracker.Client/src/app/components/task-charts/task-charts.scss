@@ -1,0 +1,66 @@
+.charts-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.charts-row {
+  display: flex;
+  gap: 20px;
+}
+
+.chart-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  flex: 1; /* Eşit genişlik */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  min-width: 250px;
+}
+
+.wide {
+  width: 100%;
+}
+
+.chart-wrapper {
+  height: 250px; /* Grafik yüksekliği */
+  width: 100%;
+}
+
+.scrollable-chart-wrapper {
+  width: 100%; /* Kartın genişliğini doldur */
+  overflow-x: auto; /* İçerik taşarsa yatay kaydırma çubuğu çıkar */
+  padding-bottom: 10px; /* Scroll bar için alt boşluk */
+
+  /* İsteğe bağlı: Scroll bar stili (Chrome/Safari) */
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+/* Webkit (Chrome) Scrollbar özelleştirme (Daha şık durur) */
+.scrollable-chart-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+.scrollable-chart-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+.scrollable-chart-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.scrollable-chart-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+h4 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.mini-charts-layout {
+  flex-wrap: wrap; /* Sığmazsa alt satıra geçsin */
+}
