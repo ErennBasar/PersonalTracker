@@ -9,6 +9,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
 import { TaskAddDialog } from '../task-add-dialog/task-add-dialog';
 import {MatTooltip} from '@angular/material/tooltip';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-list',
@@ -38,7 +39,8 @@ export class TaskList implements OnInit {
   // Servisi DI ile alıyoruz
   constructor(
     private taskService: TaskService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) { }
 
   // Component ilk açıldığında çalışır
@@ -71,7 +73,6 @@ export class TaskList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // KOD NE KADAR TEMİZLENDİ BAK:
         // Sadece tarihleri paketleyip yolluyoruz.
         const newTask: CreateTaskDto = {
           startDate: result.start,
@@ -93,16 +94,33 @@ export class TaskList implements OnInit {
     });
   }
 
-  // Satıra tıklandığında çalışacak metod
   selectTask(id: string) {
     console.log("Seçilen Görev ID:", id);
     this.selectedTaskId = id; // Tıklanan ID'yi kaydet (CSS class için)
     this.taskSelected.emit(id); // Sinyali ateşle!
   }
 
-  // Şimdilik boş metodlar (butonlar hata vermesin diye)
   onDelete(id: string) {
-    console.log("Silinecek ID:", id);
+    if (confirm('Bu görevi silmek istediğinize emin misiniz?')) {
+
+      // 2. Evet dediyse servise git
+      this.taskService.deleteTask(id).subscribe({
+        next: () => {
+          // 3. Başarılıysa bildirim göster
+          this.snackBar.open('Görev silindi', 'Tamam', {
+            duration: 3000,
+            panelClass: ['red-snackbar'] // Kırmızı uyarı stili (CSS'te tanımlıysa)
+          });
+
+          // NOT: Listeyi yenilemeye gerek yok, servisteki 'tap' sayesinde
+          // ngOnInit'teki subscribe çalışacak ve liste yenilenecek.
+        },
+        error: (err) => {
+          console.error('Silme hatası:', err);
+          this.snackBar.open('Bir hata oluştu', 'Kapat', { duration: 3000 });
+        }
+      });
+    }
   }
 
   onEdit(id: string) {

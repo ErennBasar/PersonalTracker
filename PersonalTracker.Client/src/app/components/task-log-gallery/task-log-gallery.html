@@ -1,0 +1,36 @@
+<div class="logs-grid-container">
+
+  <ng-container *ngIf="logs && logs.length > 0; else emptyState">
+
+    <div *ngFor="let log of logs" class="note-card">
+
+      <div class="card-badge" *ngIf="log.hoursSpent > 0">
+        {{ log.hoursSpent }} sa
+      </div>
+
+      <div class="card-header">
+        <span class="day">{{ log.logTime | date:'dd' }}</span>
+        <span class="month">{{ log.logTime | date:'MMM' }}</span>
+        <span class="year">{{ log.logTime | date:'yyyy' }}</span>
+        <div class="weekday">{{ log.logTime | date:'EEEE' }}</div>
+      </div>
+
+      <div class="card-body">
+        <p *ngIf="log.description; else noDesc" style="white-space: pre-wrap;">{{ log.description }}</p>
+        <ng-template #noDesc>
+          <span style="color: #888; font-style: italic; font-size: 0.9em;">Not girilmemiş.</span>
+        </ng-template>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #emptyState>
+    <div style="width: 100%; text-align: center; color: #999; margin-top: 50px;">
+      <h3>Henüz hiç kayıt yok.</h3>
+      <p>Düzenleme moduna dönüp ilk kaydını oluşturabilirsin.</p>
+    </div>
+  </ng-template>
+
+</div>

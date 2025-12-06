@@ -66,23 +66,41 @@
 //}
 
 /* Açıklama Kısmı (Esnek alan) */
+//.log-description {
+//  flex-grow: 1; /* Kalan tüm boşluğu kapla */
+//}
+//
+//.desc-input {
+//  width: 100%;
+//  padding: 8px;
+//  border: 1px solid #ddd;
+//  border-radius: 4px;
+//  outline: none;
+//  font-size: 14px;
+//  transition: border-color 0.3s;
+//  padding-right: 30px;
+//  resize: vertical; /* Kullanıcı boyunu değiştirebilsin */
+//}
+
+// 2. AÇIKLAMA KISMI (ESNEK)
 .log-description {
-  flex-grow: 1; /* Kalan tüm boşluğu kapla */
+  flex: 1;             // "Kalan BÜTÜN boşluğu sen al ama sınırını bil" demektir.
+  min-width: 0;        // Flexbox içinde text taşmasını engelleyen sigorta koddur.
+
+  .desc-input {
+    width: 100%;       // Kapsayıcısına tam otursun
+    resize: vertical;  // Sadece aşağı doğru uzasın, yana taşmasın
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box; // Paddingleri genişliğe dahil et
+  }
 }
 
-.desc-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  outline: none;
-  font-size: 14px;
-  transition: border-color 0.3s;
-}
-
-.desc-input:focus {
-  border-color: #ff9800; /* Tıklayınca turuncu olsun */
-}
+//.desc-input:focus {
+//  border-color: #ff9800; /* Tıklayınca turuncu olsun */
+//}
 
 /* Saat Kısmı */
 .log-hours {
@@ -147,4 +165,79 @@
 .right-panel {
   flex: 1;             /* Bu da 1 birim alsın (Eşit bölüşürler) */
   min-width: 300px;
+}
+/* Ana Görev Araç Çubuğu */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Textarea ile arası */
+  background-color: #f5f5f5;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* Loglar için Mini Araç Çubuğu */
+.mini-toolbar {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+
+/* Log içindeki mini butonlar (Angular Material butonu kullanmadık, yer kaplamasın diye) */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #777;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn:hover {
+  color: #3f51b5; /* Üzerine gelince mavi olsun */
+}
+
+/* Log içindeki mini buton */
+.mini-list-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa; /* Silik renk */
+  padding: 2px;
+}
+
+.mini-list-btn:hover {
+  color: #ff9800; /* Üzerine gelince turuncu */
+  background-color: #fff3e0;
+  border-radius: 50%;
+}
+
+.detail-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  // Hafif gölge verelim, havada dursun
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px; // İçerikle arasına boşluk koyduk
+
+  .toolbar-title {
+    margin-left: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+// Bu çok önemli: Aradaki boşluğu doldurup diğerlerini sağa iter
+.spacer {
+  flex: 1 1 auto;
+}
+
+// Butonlar birbirine yapışmasın diye aralarına biraz boşluk
+button {
+  margin-left: 8px;
 }

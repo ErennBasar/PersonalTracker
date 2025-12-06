@@ -64,5 +64,11 @@ public class TodoController : ControllerBase
         
         return Ok();
     }
+
+    // public async Task<ActionResult> GetListTaskLogs(Guid taskId)
+    // {
+    //     var result = await _todoService.GetListTaskLogsAsync(taskId);
+    //     return Ok(result);
+    // }
     
 }

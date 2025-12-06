@@ -16,14 +16,16 @@ export class TaskService {
   get refreshNeeded$() {
     return this._refreshNeeded$;
   }
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
 
   // Listeleme (Get)
-  getTasks(): Observable<TaskDto[]>{
+  getTasks(): Observable<TaskDto[]> {
     return this.http.get<TaskDto[]>(this.apiUrl);
   }
 
-  getTaskById(id: string): Observable<TaskDto>{
+  getTaskById(id: string): Observable<TaskDto> {
     return this.http.get<TaskDto>(`${this.apiUrl}/${id}`);
   }
 
@@ -51,6 +53,11 @@ export class TaskService {
 
   // Silme (Delete)
   deleteTask(id: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => {
+        // Silme başarılıysa zili çal, herkes duysun
+        this._refreshNeeded$.next();
+      })
+    );
   }
 }

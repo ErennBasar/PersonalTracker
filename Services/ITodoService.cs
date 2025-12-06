@@ -11,4 +11,7 @@ public interface ITodoService
     Task<bool> DeleteTaskAsync(Guid id);
     Task<TaskDto> GetTaskByIdAsync(Guid id);
     Task<TaskLogDto> UpdateLogAsync(Guid logId, UpdateTaskLogDto updateTaskLogDto);
+    
+    //Task<List<ListTaskLogsDto>> GetListTaskLogsAsync(Guid taskId);
+    
 }

@@ -239,4 +239,20 @@ public class TodoService : ITodoService
             Description = existingLog.Description,
         };
     }
+
+    // public async Task<List<ListTaskLogsDto>> GetListTaskLogsAsync(Guid taskId)
+    // {
+    //     var logs = await _dbContext.TaskLogs
+    //         .Where(x => x.UserTaskId == taskId)
+    //         .OrderByDescending(x => x.LogTime)
+    //         .Select(x => new ListTaskLogsDto
+    //         {
+    //             LogTime = x.LogTime,
+    //             Description = x.Description,
+    //             HoursSpent = x.HoursSpent,
+    //             
+    //         }).ToListAsync();
+    //     
+    //     return logs;
+    // }
 }

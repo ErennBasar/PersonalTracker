@@ -7,13 +7,17 @@
   <mat-drawer-content>
     <div *ngIf="selectedTaskId; else calendarView" style="padding: 20px;">
 
-      <button mat-stroked-button (click)="backToCalendar()" style="margin-bottom: 10px;">
-        <mat-icon>arrow_back</mat-icon> Takvime Dön
-      </button>
+<!--      <button mat-stroked-button (click)="backToCalendar()" style="margin-bottom: 10px;">-->
+<!--        <mat-icon>arrow_back</mat-icon> Takvime Dön-->
+<!--      </button>-->
 
 
 
-      <app-task-detail [taskId]="selectedTaskId"></app-task-detail>
+      <app-task-detail
+        [taskId]="selectedTaskId"
+        (closeDetail)="selectedTaskId = null">
+
+      </app-task-detail>
     </div>
 
     <ng-template #calendarView>

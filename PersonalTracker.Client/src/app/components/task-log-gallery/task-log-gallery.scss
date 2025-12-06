@@ -1,0 +1,56 @@
+.logs-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.note-card {
+  background-color: #e3f2fd; /* Material Blue 50 */
+  border: 1px solid #90caf9;
+  border-radius: 12px;
+  padding: 15px;
+  height: 220px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.card-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #1565c0; /* Koyu Mavi */
+  color: white;
+  font-size: 0.75em;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.card-header {
+  border-bottom: 1px solid #bbdefb;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  color: #0d47a1;
+}
+
+.card-header .day { font-size: 1.4em; font-weight: bold; margin-right: 4px; }
+.card-header .month { font-size: 1em; text-transform: uppercase; }
+.card-header .weekday { font-size: 0.8em; color: #555; }
+
+.card-body {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.9em;
+  color: #333;
+  line-height: 1.4;
+  scrollbar-width: thin;
+  scrollbar-color: #90caf9 transparent;
+}
