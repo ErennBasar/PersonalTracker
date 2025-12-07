@@ -88,15 +88,27 @@
           </div>
 
         </div>
+<!--gk-->
+        <div style="margin-top: 20px;">
+          <mat-form-field appearance="outline" style="width: 100%;" subscriptSizing="dynamic">
+            <mat-label>📊 Görev Karşılaştır</mat-label>
+            <mat-select multiple [(ngModel)]="selectedCompareTasks">
+              <mat-option *ngFor="let task of availableTasksForCompare" [value]="task">
+                {{ task.header }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 10px;">
           <app-task-charts
             [currentTask]="selectedTask"
             [allTasks]="allTasks"
+            [comparisonTasks]="selectedCompareTasks"
             [showTrend]="false"
-            [showSummary]="true">
-          </app-task-charts>
+            [showSummary]="true"> </app-task-charts>
         </div>
+<!--        gk-->
 
       </div>
 
@@ -154,6 +166,7 @@
     <app-task-charts
       [currentTask]="selectedTask"
       [allTasks]="allTasks"
+      [comparisonTasks]="selectedCompareTasks"
       [showTrend]="true"
       [showSummary]="false">
     </app-task-charts>

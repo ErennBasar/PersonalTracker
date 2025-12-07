@@ -15,15 +15,16 @@ import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
 import {TaskLogGallery} from '../task-log-gallery/task-log-gallery';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-task-detail',
   imports: [
     CommonModule,
     FormsModule,
-    MatButtonModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatSnackBarModule,MatCheckbox,MatIcon,MatTooltip,
+    MatButtonModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,
+    MatSnackBarModule,MatCheckbox,MatIcon,MatTooltip,MatSelectModule, MatToolbarModule,
     TaskCharts,
-    MatToolbarModule,
     TaskLogGallery,
   ],
   templateUrl: './task-detail.html',
@@ -37,7 +38,8 @@ export class TaskDetail implements OnChanges {
   isGridView: boolean = false;
   allTasks: TaskDto[] = [];
   isSaving = false;
-
+  selectedCompareTasks: TaskDto[] = [];
+  availableTasksForCompare: TaskDto[] = [];
 
   constructor(private taskService: TaskService, private snackBar: MatSnackBar) {
   }
@@ -55,7 +57,10 @@ export class TaskDetail implements OnChanges {
       this.loadTaskDetail(this.taskId);
 
       // Grafikler için tüm listeyi çektik
-      this.taskService.getTasks().subscribe(res => this.allTasks = res);
+      this.taskService.getTasks().subscribe(res => {
+        this.allTasks = res;
+        this.updateAvailableTasks();
+      });
     }
   }
 
@@ -66,7 +71,18 @@ export class TaskDetail implements OnChanges {
       if (this.selectedTask) {
         this.selectedTask.logs = this.selectedTask.logs ?? [];
       }
+      this.updateAvailableTasks();
     });
+  }
+
+  updateAvailableTasks() {
+    if (!this.selectedTask || this.allTasks.length === 0) return;
+
+    // Şu anki görevi listeden çıkar (İnsan kendini kendisiyle kıyaslamaz)
+    this.availableTasksForCompare = this.allTasks.filter(t => t.id !== this.selectedTask?.id);
+
+    // Eğer ana görev değiştiyse, eski seçimleri temizle ki grafik sapıtmasın
+    this.selectedCompareTasks = [];
   }
 
   saveChanges() {

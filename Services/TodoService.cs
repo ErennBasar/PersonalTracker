@@ -17,6 +17,7 @@ public class TodoService : ITodoService
     public async Task<IEnumerable<TaskDto>> GetAllAsync()
     {
         var todoTasks = await _dbContext.Tasks
+            .Include(x => x.TaskLogs)
             .OrderBy(t => t.CreatedDate)
             .ToListAsync();
 
@@ -30,6 +31,14 @@ public class TodoService : ITodoService
             EndDate = t.EndDate,
             HoursTaken = t.HoursTaken,
             IsCompleted = t.IsCompleted,
+            
+            Logs = t.TaskLogs.Select(l => new TaskLogDto 
+            {
+                Id = l.Id,
+                LogTime = l.LogTime, 
+                HoursSpent = l.HoursSpent,
+                Description = l.Description
+            }).ToList()
         });
         return taskDtos;
     }
