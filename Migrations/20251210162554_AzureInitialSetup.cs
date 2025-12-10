@@ -6,19 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PersonalTrackerDeneme2.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTaskLogsTable : Migration
+    public partial class AzureInitialSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Header",
-                table: "Tasks",
-                type: "text",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "character varying(200)",
-                oldMaxLength: 200);
+            migrationBuilder.CreateTable(
+                name: "Tasks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Header = table.Column<string>(type: "text", nullable: true),
+                    Body = table.Column<string>(type: "text", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    HoursTaken = table.Column<decimal>(type: "numeric(6,2)", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "TaskLogs",
@@ -53,16 +62,8 @@ namespace PersonalTrackerDeneme2.Migrations
             migrationBuilder.DropTable(
                 name: "TaskLogs");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Header",
-                table: "Tasks",
-                type: "character varying(200)",
-                maxLength: 200,
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
+            migrationBuilder.DropTable(
+                name: "Tasks");
         }
     }
 }

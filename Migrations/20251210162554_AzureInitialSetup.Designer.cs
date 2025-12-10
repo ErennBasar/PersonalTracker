@@ -12,8 +12,8 @@ using PersonalTrackerDeneme2.Data;
 namespace PersonalTrackerDeneme2.Migrations
 {
     [DbContext(typeof(PersonalTrackerDeneme2DbContext))]
-    [Migration("20251121144730_AddTaskLogsTable")]
-    partial class AddTaskLogsTable
+    [Migration("20251210162554_AzureInitialSetup")]
+    partial class AzureInitialSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
