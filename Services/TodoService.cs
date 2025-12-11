@@ -18,7 +18,7 @@ public class TodoService : ITodoService
     {
         var todoTasks = await _dbContext.Tasks
             .Include(x => x.TaskLogs)
-            .OrderBy(t => t.CreatedDate)
+            .OrderByDescending(t => t.UpdatedDate ?? t.CreatedDate)
             .ToListAsync();
 
         var taskDtos = todoTasks.Select(t => new TaskDto
@@ -29,6 +29,7 @@ public class TodoService : ITodoService
             CreatedDate = t.CreatedDate,
             StartDate = t.StartDate,
             EndDate = t.EndDate,
+            UpdatedDate = t.UpdatedDate,
             HoursTaken = t.HoursTaken,
             IsCompleted = t.IsCompleted,
             
