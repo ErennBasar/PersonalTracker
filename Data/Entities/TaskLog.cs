@@ -9,6 +9,8 @@ public class TaskLog : BaseEntity
     public Guid UserTaskId  { get; set; }
     // O günün tarihi
     public DateTime LogTime { get; set; }
+    public DateTime? UpdatedDate { get; set; }
+    
     [Column(TypeName = "numeric(4,2)")]
     public decimal HoursSpent { get; set; }
     public string? Description { get; set; }

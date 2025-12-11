@@ -12,6 +12,7 @@ public class UserTask : BaseEntity
     public DateTime? EndDate { get; set; }
     public DateTime? StartDate { get; set; } 
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedDate { get; set; } 
     
     [Column(TypeName = "decimal(6,2)")]
     public decimal HoursTaken { get; set; } = 0;

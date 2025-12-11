@@ -40,12 +40,17 @@ export class TaskDetail implements OnChanges {
   isSaving = false;
   selectedCompareTasks: TaskDto[] = [];
   availableTasksForCompare: TaskDto[] = [];
+  modifiedLogIds: Set<string> = new Set<string>();
 
   constructor(private taskService: TaskService, private snackBar: MatSnackBar) {
   }
 
   toggleViewMode(){
     this.isGridView = !this.isGridView;
+  }
+
+  markLogAsModified(logId: string) {
+    this.modifiedLogIds.add(logId);
   }
 
   goBack() {
@@ -72,6 +77,7 @@ export class TaskDetail implements OnChanges {
         this.selectedTask.logs = this.selectedTask.logs ?? [];
       }
       this.updateAvailableTasks();
+      this.modifiedLogIds.clear();
     });
   }
 
@@ -114,15 +120,18 @@ export class TaskDetail implements OnChanges {
     if (this.selectedTask.logs) {
       this.selectedTask.logs.forEach(log => {
 
-        // Ufak bir optimizasyon: Sadece saati veya açıklaması dolu olanları güncelleyelim
-        // (Veya hepsini güncelleyebilirsin, sorun olmaz)
-        const logUpdateModel: UpdateTaskLogDto = { // Senin Angular modeline bu interface'i eklemen lazım
-          hoursSpent: log.hoursSpent,
-          description: log.description
-        };
+        // KONTROL: Eğer bu logun ID'si "değişenler" listesinde varsa yolla
+        if (this.modifiedLogIds.has(log.id)) {
 
-        // Her bir log için ayrı bir istek oluşturup havuza atıyoruz
-        requests.push(this.taskService.updateLog(log.id, logUpdateModel));
+          // Ufak bir optimizasyon: Sadece saati veya açıklaması dolu olanları güncelleyelim
+          const logUpdateModel: UpdateTaskLogDto = {
+            hoursSpent: log.hoursSpent,
+            description: log.description,
+          };
+
+          // Her bir log için ayrı bir istek oluşturup havuza atıyoruz
+          requests.push(this.taskService.updateLog(log.id, logUpdateModel));
+        }
       });
     }
 

@@ -5,6 +5,7 @@ export interface TaskDto {
   createdDate: string;
   startDate: string;
   endDate: string;
+  updatedDate: string;
   isCompleted: boolean;
   hoursTaken: number;
   logs?: TaskLogDto[];
@@ -28,6 +29,7 @@ export interface TaskLogDto {
   logTime: string;
   hoursSpent: number;
   description: string;
+  updatedDate: string;
 }
 
 export interface UpdateTaskLogDto {

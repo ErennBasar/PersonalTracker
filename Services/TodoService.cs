@@ -99,15 +99,6 @@ public class TodoService : ITodoService
         
         if(updateTaskDto.IsCompleted.HasValue)
             existTask.IsCompleted = updateTaskDto.IsCompleted.Value;
-        
-        // if(updateTaskDto.HoursTaken.HasValue)
-        //     existTask.HoursTaken = updateTaskDto.HoursTaken.Value;
-        
-        //if(updateTaskDto.EndDate != null)
-          //  existTask.EndDate = updateTaskDto.EndDate;
-        
-        // if(updateTaskDto.StartDate != null)
-        //     existTask.StartDate = updateTaskDto.StartDate;
 
         DateTime newStartDate = updateTaskDto.StartDate.HasValue 
             ? DateTime.SpecifyKind(updateTaskDto.StartDate.Value, DateTimeKind.Utc).Date
@@ -116,6 +107,8 @@ public class TodoService : ITodoService
         DateTime newEndDate = updateTaskDto.EndDate.HasValue 
             ? DateTime.SpecifyKind(updateTaskDto.EndDate.Value, DateTimeKind.Utc).Date 
             : existTask.EndDate!.Value.Date;
+        
+        existTask.UpdatedDate = DateTime.UtcNow;
         
         if (newStartDate != existTask.StartDate!.Value.Date || newEndDate != existTask.EndDate!.Value.Date)
         {
@@ -126,7 +119,7 @@ public class TodoService : ITodoService
             
             foreach (var log in logsToRemove)
             {
-                _dbContext.TaskLogs.Remove(log); // Veritabanından da sildik
+                _dbContext.TaskLogs.Remove(log); 
             }
 
             for (var date = newStartDate; date <= newEndDate; date = date.AddDays(1))
@@ -167,7 +160,7 @@ public class TodoService : ITodoService
             EndDate = existTask.EndDate,
             HoursTaken = existTask.HoursTaken,
             IsCompleted = existTask.IsCompleted,
-            // UpdatedDate = DateTime.UtcNow  // güncelleme işlemi yapıldığında o anki tarihi güncelleyecek 
+            UpdatedDate = existTask.UpdatedDate
         };
     }
 
@@ -229,6 +222,8 @@ public class TodoService : ITodoService
 
         if (updateTaskLogDto.Description != null)
             existingLog.Description = updateTaskLogDto.Description;
+        
+        existingLog.UpdatedDate = DateTime.UtcNow;
 
         await _dbContext.SaveChangesAsync();
         
@@ -246,6 +241,7 @@ public class TodoService : ITodoService
             LogTime = existingLog.LogTime,
             HoursSpent = existingLog.HoursSpent,
             Description = existingLog.Description,
+            UpdatedDate = existingLog.UpdatedDate
         };
     }
 

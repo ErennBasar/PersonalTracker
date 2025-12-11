@@ -26,9 +26,6 @@ Bu projeyi çalıştırabilmeniz için bilgisayarınızda şunların kurulu olma
 ## KRİTİK AYAR ⚠️ - Azure Bağlantısı
 Bu proje yerel veritabanı kullanmaz. Ortak Azure veritabanına bağlanmak için bağlantı cümlesini (Connection String) ayarlamanız gerekir.
 
-Güvenlik gereği veritabanı bağlantı ayarları repoda yoktur.
-Ana dizinde içine `appsettings.json` adında bir dosya oluşturun ve içine şunları yapıştırın:
-
 * "ConnectionStrings": {
 "DefaultConnection": "Host=ptracker-db-eren.postgres.database.azure.com;Port=5432;Database=PersonalTrackerDB;Username=erenadmin;Password=ŞİFRENİZİ_BURAYA_YAZIN"
 }

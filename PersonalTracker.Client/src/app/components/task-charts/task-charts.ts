@@ -27,7 +27,7 @@ export class TaskCharts implements OnChanges{
   chartWidth: number = 1400;
 
   //colorPalette = ['#e91e63', '#9c27b0', '#009688', '#795548', '#607d8b'];
-  colorPalette = ['#ff9800', '#2196f3', '#e91e63', '#9c27b0', '#795548'];
+  colorPalette = ['#98739e', '#2196f3', '#a5ddf2', '#9c27b0', '#795548',];
 
   lineChartScheme: any = {
     domain: ['#4caf50', '#ff9800', '#2196f3', '#e91e63', '#9c27b0', '#795548']

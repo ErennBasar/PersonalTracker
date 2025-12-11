@@ -7,8 +7,10 @@ public class TaskDto
     public string? Body { get; set; }
     public DateTime? EndDate { get; set; }
     public DateTime? StartDate { get; set; } 
-    public DateTime CreatedDate { get; set; } 
+    public DateTime CreatedDate { get; set; }
+    public DateTime? UpdatedDate { get; set; }
     public decimal HoursTaken { get; set; } 
     public bool IsCompleted { get; set; } 
     public List<TaskLogDto> Logs { get; set; }
+    
 }

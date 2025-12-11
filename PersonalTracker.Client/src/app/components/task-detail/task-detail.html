@@ -127,6 +127,7 @@
             <div class="log-description" style="position: relative;">
               <textarea
                 [(ngModel)]="log.description"
+                (ngModelChange)="markLogAsModified(log.id)"
                 (keydown)="handleEnter($event, log, 'description')"
                 (click)="toggleCheckbox($event, log, 'description')"
                 placeholder="Notlar..."
@@ -141,6 +142,7 @@
             <div class="log-hours">
               <label>Saat:</label>
               <input type="number"
+                     (ngModelChange)="markLogAsModified(log.id)"
                      [(ngModel)]="log.hoursSpent"
                      min="0" step="0.5"
                      class="hour-input">

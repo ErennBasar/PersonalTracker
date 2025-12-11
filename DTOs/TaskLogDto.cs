@@ -6,4 +6,5 @@ public class TaskLogDto
     public DateTime LogTime { get; set; }
     public decimal HoursSpent { get; set; }
     public string? Description { get; set; }
+    public DateTime? UpdatedDate { get; set; }
 }
