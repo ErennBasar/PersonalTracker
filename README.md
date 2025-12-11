@@ -24,7 +24,7 @@ Bu projeyi çalıştırabilmeniz için bilgisayarınızda şunların kurulu olma
 2.  **[Node.js (v18+)](https://nodejs.org/en):** Angular projesi için.
 
 ## KRİTİK AYAR ⚠️ - Azure Bağlantısı
-Bu proje yerel veritabanı kullanmaz. Ortak Azure veritabanına bağlanmak için bağlantı cümlesini (Connection String) ayarlamanız gerekir.
+Bu proje yerel veritabanı kullanmaz. Ortak Azure veritabanına bağlanmak için projedeki `appsettings.json` dosyasında bağlantı cümlesini (Connection String) ayarlamanız gerekir. 
 
 * "ConnectionStrings": {
 "DefaultConnection": "Host=ptracker-db-eren.postgres.database.azure.com;Port=5432;Database=PersonalTrackerDB;Username=erenadmin;Password=ŞİFRENİZİ_BURAYA_YAZIN"
