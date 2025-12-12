@@ -53,6 +53,7 @@ public class TodoService : ITodoService
         {
             StartDate = startDate,
             EndDate = endDate,
+            UserId = createTaskDto.UserId,
             TaskLogs = new List<TaskLog>()
         };
 

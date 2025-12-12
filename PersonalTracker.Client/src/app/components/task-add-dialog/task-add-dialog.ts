@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth';
 
 @Component({
   selector: 'app-task-add-dialog',
@@ -29,8 +30,9 @@ export class TaskAddDialog {
     end: new FormControl<Date | null>(null, Validators.required),
   });
 
-  constructor(public dialogRef: MatDialogRef<TaskAddDialog>,) {
-  }
+  constructor(
+    public dialogRef: MatDialogRef<TaskAddDialog>,
+  ) {}
 
   onCancel() {
     this.dialogRef.close();

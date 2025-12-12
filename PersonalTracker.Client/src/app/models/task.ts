@@ -14,6 +14,7 @@ export interface TaskDto {
 export interface CreateTaskDto {
   startDate: string;
   endDate: string;
+  userId: string;
 }
 
 export interface UpdateTaskDto {

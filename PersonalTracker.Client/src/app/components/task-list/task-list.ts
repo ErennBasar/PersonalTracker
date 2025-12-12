@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CreateTaskDto, TaskDto} from '../../models/task';
 import {TaskService} from '../../services/task';
+import { AuthService } from '../../services/auth';
 import {CommonModule} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton, MatIconButton, MatMiniFabButton} from '@angular/material/button';
@@ -39,6 +40,7 @@ export class TaskList implements OnInit {
   // Servisi DI ile alıyoruz
   constructor(
     private taskService: TaskService,
+    private authService: AuthService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
   ) { }
@@ -73,16 +75,33 @@ export class TaskList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Sadece tarihleri paketleyip yolluyoruz.
+        // 1. Giriş yapan kullanıcının ID'sini al
+        const currentUserId = this.authService.getCurrentUserId();
+
+        if (!currentUserId) {
+          console.error("Kullanıcı girişi yapılmamış!");
+          return;
+        }
+
+        // 2. DTO'yu hazırla (Dialog verisi + UserID)
         const newTask: CreateTaskDto = {
           startDate: result.start,
-          endDate: result.end
+          endDate: result.end,
+          userId: currentUserId
         };
 
-        this.createTask(newTask);
+        // 3. Servise gönder
+        this.taskService.createTask(newTask).subscribe({
+          next: (res) => {
+            console.log("Görev oluşturuldu:", res);
+            this.loadTasks(); // Listeyi yenile
+          },
+          error: (err) => console.error("Hata:", err)
+        });
       }
     });
   }
+
   // API'ye kayıt isteği
   createTask(task: CreateTaskDto) {
     this.taskService.createTask(task).subscribe({
