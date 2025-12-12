@@ -57,15 +57,27 @@ export class TaskList implements OnInit {
 
   // servisten verileri çeken metod
   loadTasks(){
-    this.taskService.getTasks().subscribe({
-      next: (data) => {
-        console.log('veriler geldi',data);
-        this.tasks = data;
-      },
-      error: (err) => {
-        console.error('Veri çekme hatası', err)
-      }
-    });
+    const currentUserId = this.authService.getCurrentUserId();
+
+    console.log("AuthService'den gelen ID:", currentUserId);
+
+    if (!currentUserId) {
+      console.warn("Giriş yapmamış kullanıcı. Görevler yüklenemiyor.");
+      this.tasks = [];
+      return;
+    }
+
+    if (currentUserId){
+      this.taskService.getTasks(currentUserId).subscribe({
+        next: (data) => {
+          console.log('veriler geldi',data);
+          this.tasks = data;
+        },
+        error: (err) => {
+          console.error('Veri çekme hatası', err)
+        }
+      });
+    }
   }
 
   openAddDialog() {
@@ -87,7 +99,8 @@ export class TaskList implements OnInit {
         const newTask: CreateTaskDto = {
           startDate: result.start,
           endDate: result.end,
-          userId: currentUserId
+          userId: currentUserId,
+          isCommon: result.isCommon || false,
         };
 
         // 3. Servise gönder

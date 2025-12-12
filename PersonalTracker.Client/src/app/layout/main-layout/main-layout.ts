@@ -6,6 +6,7 @@ import {TaskDetail} from '../../components/task-detail/task-detail';
 import {TaskCalendar} from '../../components/task-calendar/task-calendar';
 import {TaskDto} from '../../models/task';
 import {TaskService} from '../../services/task';
+import {AuthService} from '../../services/auth';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,7 +25,7 @@ export class MainLayout {
   // Tüm görevleri burada tutalım ki Child'lara dağıtalım
   allTasks: TaskDto[] = [];
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private authService: AuthService) {
     this.loadAllTasks();
 
     // Sol tarafta bir değişiklik olunca (ekleme/silme),
@@ -35,7 +36,11 @@ export class MainLayout {
   }
 
   loadAllTasks() {
-    this.taskService.getTasks().subscribe(res => this.allTasks = res);
+    const currentUserId = this.authService.getCurrentUserId()
+
+    if(currentUserId){
+      this.taskService.getTasks(currentUserId).subscribe(res => this.allTasks = res);
+    }
   }
   // Listeden sinyal gelince bu çalışır
   onTaskSelect(id: string) {

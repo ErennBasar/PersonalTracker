@@ -1,5 +1,6 @@
 export interface TaskDto {
   id: string;
+  userId: string;
   header: string;
   body: string;
   createdDate: string;
@@ -7,6 +8,7 @@ export interface TaskDto {
   endDate: string;
   updatedDate: string;
   isCompleted: boolean;
+  isCommon: boolean;
   hoursTaken: number;
   logs?: TaskLogDto[];
 }
@@ -15,6 +17,7 @@ export interface CreateTaskDto {
   startDate: string;
   endDate: string;
   userId: string;
+  isCommon: boolean;
 }
 
 export interface UpdateTaskDto {

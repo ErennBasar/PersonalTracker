@@ -4,7 +4,7 @@ namespace PersonalTrackerDeneme2.Services;
 
 public interface ITodoService
 {
-    Task<IEnumerable<TaskDto>> GetAllAsync();
+    Task<IEnumerable<TaskDto>> GetAllAsync(Guid userId);
     Task<TaskDto> CreateTaskAsync(CreateTaskDto createTaskDto);
     
     Task<TaskDto> UpdateTaskAsync(Guid id, UpdateTaskDto updateTaskDto);

@@ -7,6 +7,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {MatNativeDateModule} from '@angular/material/core';
 import {CommonModule} from '@angular/common';
 import {AuthService} from '../../services/auth';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-task-add-dialog',
@@ -18,6 +19,7 @@ import {AuthService} from '../../services/auth';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule
   ],
   templateUrl: './task-add-dialog.html',
   styleUrl: './task-add-dialog.scss',
@@ -28,6 +30,7 @@ export class TaskAddDialog {
   range = new FormGroup({
     start: new FormControl<Date | null>(null, Validators.required),
     end: new FormControl<Date | null>(null, Validators.required),
+    isCommon: new FormControl(false)
   });
 
   constructor(

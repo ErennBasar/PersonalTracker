@@ -16,9 +16,12 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TaskDto>>> GetAllAsync()
+    public async Task<ActionResult<IEnumerable<TaskDto>>> GetAllAsync([FromQuery] Guid userId)
     {
-        var userTasks = await _todoService.GetAllAsync();
+        if (userId == Guid.Empty) 
+            return BadRequest("Kullanıcı ID'si zorunludur.");
+        
+        var userTasks = await _todoService.GetAllAsync(userId);
         return Ok(userTasks);
     }
     

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject, tap} from 'rxjs';
 import {CreateTaskDto, TaskDto, UpdateTaskDto, UpdateTaskLogDto} from '../models/task';
 
@@ -21,8 +21,10 @@ export class TaskService {
   }
 
   // Listeleme (Get)
-  getTasks(): Observable<TaskDto[]> {
-    return this.http.get<TaskDto[]>(this.apiUrl);
+  getTasks(userId: string): Observable<TaskDto[]> {
+    let params = new HttpParams().set('userId', userId);
+
+    return this.http.get<TaskDto[]>(this.apiUrl, {params: params});
   }
 
   getTaskById(id: string): Observable<TaskDto> {

@@ -16,6 +16,7 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {TaskLogGallery} from '../task-log-gallery/task-log-gallery';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
+import {AuthService} from '../../services/auth';
 
 @Component({
   selector: 'app-task-detail',
@@ -42,7 +43,7 @@ export class TaskDetail implements OnChanges {
   availableTasksForCompare: TaskDto[] = [];
   modifiedLogIds: Set<string> = new Set<string>();
 
-  constructor(private taskService: TaskService, private snackBar: MatSnackBar) {
+  constructor(private taskService: TaskService, private snackBar: MatSnackBar, private authService:AuthService) {
   }
 
   toggleViewMode(){
@@ -61,11 +62,15 @@ export class TaskDetail implements OnChanges {
     if (changes['taskId'] && this.taskId) {
       this.loadTaskDetail(this.taskId);
 
-      // Grafikler için tüm listeyi çektik
-      this.taskService.getTasks().subscribe(res => {
-        this.allTasks = res;
-        this.updateAvailableTasks();
-      });
+      const currentUserId = this.authService.getCurrentUserId();
+
+      if(currentUserId){
+        // Grafikler için tüm listeyi çektik
+        this.taskService.getTasks(currentUserId).subscribe(res => {
+          this.allTasks = res;
+          this.updateAvailableTasks();
+        });
+      }
     }
   }
 

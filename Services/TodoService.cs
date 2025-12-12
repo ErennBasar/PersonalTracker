@@ -14,16 +14,18 @@ public class TodoService : ITodoService
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<TaskDto>> GetAllAsync()
+    public async Task<IEnumerable<TaskDto>> GetAllAsync(Guid userId)
     {
         var todoTasks = await _dbContext.Tasks
             .Include(x => x.TaskLogs)
+            .Where(x => x.UserId == userId || x.IsCommon == true)
             .OrderByDescending(t => t.UpdatedDate ?? t.CreatedDate)
             .ToListAsync();
 
         var taskDtos = todoTasks.Select(t => new TaskDto
         {
             Id = t.Id,
+            UserId = t.UserId,
             Header = t.Header,
             Body = t.Body,
             CreatedDate = t.CreatedDate,
@@ -32,6 +34,7 @@ public class TodoService : ITodoService
             UpdatedDate = t.UpdatedDate,
             HoursTaken = t.HoursTaken,
             IsCompleted = t.IsCompleted,
+            IsCommon = t.IsCommon,
             
             Logs = t.TaskLogs.Select(l => new TaskLogDto 
             {
@@ -54,6 +57,7 @@ public class TodoService : ITodoService
             StartDate = startDate,
             EndDate = endDate,
             UserId = createTaskDto.UserId,
+            IsCommon = createTaskDto.IsCommon,
             TaskLogs = new List<TaskLog>()
         };
 
@@ -73,6 +77,7 @@ public class TodoService : ITodoService
         var clientResponse = new TaskDto
         {
             Id = createdDto.Id,
+            UserId = createdDto.UserId,
             Header = createdDto.Header,
             Body = createdDto.Body,
             CreatedDate = createdDto.CreatedDate,
@@ -80,6 +85,7 @@ public class TodoService : ITodoService
             EndDate = createdDto.EndDate,
             HoursTaken = createdDto.HoursTaken,
             IsCompleted = createdDto.IsCompleted,
+            IsCommon = createdDto.IsCommon,
         };
         return clientResponse;
     }
