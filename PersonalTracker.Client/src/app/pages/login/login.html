@@ -1,0 +1,52 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header style="justify-content: center; margin-bottom: 20px;">
+      <mat-card-title>Personal Tracker</mat-card-title>
+    </mat-card-header>
+
+    <mat-tab-group animationDuration="0ms">
+
+      <mat-tab label="Giriş Yap">
+        <div class="form-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Kullanıcı Adı</mat-label>
+            <input matInput [(ngModel)]="loginData.username">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Şifre</mat-label>
+            <input matInput type="password" [(ngModel)]="loginData.password">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" (click)="onLogin()">GİRİŞ YAP</button>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Kayıt Ol">
+        <div class="form-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Kullanıcı Adı Seçin</mat-label>
+            <input matInput [(ngModel)]="registerData.username">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Şifre Belirleyin</mat-label>
+            <input matInput type="password" [(ngModel)]="registerData.password">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Cinsiyet</mat-label>
+            <mat-select [(ngModel)]="registerData.gender">
+              <mat-option *ngFor="let option of genderOptions" [value]="option.value">
+                {{ option.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" (click)="onRegister()">KAYIT OL</button>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </mat-card>
+</div>

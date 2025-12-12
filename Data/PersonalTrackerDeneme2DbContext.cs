@@ -11,4 +11,5 @@ public class PersonalTrackerDeneme2DbContext : DbContext
     
     public DbSet<UserTask> Tasks { get; set; }
     public DbSet<TaskLog> TaskLogs { get; set; }
+    public DbSet<User> Users { get; set; }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalTrackerDeneme2.Data;
@@ -11,9 +12,11 @@ using PersonalTrackerDeneme2.Data;
 namespace PersonalTrackerDeneme2.Migrations
 {
     [DbContext(typeof(PersonalTrackerDeneme2DbContext))]
-    partial class PersonalTrackerDeneme2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20251212140032_AddUserTableAndCommonTask")]
+    partial class AddUserTableAndCommonTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,10 +61,6 @@ namespace PersonalTrackerDeneme2.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
