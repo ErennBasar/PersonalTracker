@@ -69,7 +69,7 @@ export class Login {
     this.authService.login(this.loginData).subscribe({
       next: (res) => {
         this.snackBar.open('Giriş Başarılı!', 'Tamam', { duration: 3000 });
-        this.router.navigate(['/']); // Ana sayfaya yönlendir
+        this.router.navigate(['/tasks']);
       },
       error: (err) => {
         this.snackBar.open('Giriş Başarısız: ' + err.error, 'Kapat', { duration: 3000 });
