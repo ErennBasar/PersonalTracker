@@ -5,8 +5,14 @@ using PersonalTrackerDeneme2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connString = Configuration.ConnectionString 
+                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' bulunamadı. Azure Environment Variables veya appsettings kontrol ediniz.");
+
 builder.Services.AddDbContext<PersonalTrackerDeneme2DbContext>(options =>
-    options.UseNpgsql(Configuration.ConnectionString));
+    options.UseNpgsql(connString));
+
+// builder.Services.AddDbContext<PersonalTrackerDeneme2DbContext>(options =>
+//     options.UseNpgsql(Configuration.ConnectionString));
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
