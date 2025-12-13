@@ -4,7 +4,7 @@ import {TaskService} from '../../services/task';
 import { AuthService } from '../../services/auth';
 import {CommonModule} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
-import {MatButton, MatIconButton, MatMiniFabButton} from '@angular/material/button';
+import {MatIconButton, MatMiniFabButton} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
@@ -18,10 +18,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     CommonModule,
     MatTableModule,
     MatIcon,
-    MatButton, MatIconButton,
+    MatIconButton,
     MatSidenavModule,
     MatDialogModule,
-    TaskAddDialog, MatMiniFabButton, MatTooltip,
+    MatMiniFabButton, MatTooltip,
   ],
   templateUrl: './task-list.html',
   styleUrl: './task-list.scss',

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject, tap} from 'rxjs';
 import {CreateTaskDto, TaskDto, UpdateTaskDto, UpdateTaskLogDto} from '../models/task';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:5256/api/Todo';
+  private apiUrl = environment.apiUrl;
 
   // Bu bizim "Yenileme Zili"miz
   private _refreshNeeded$ = new Subject<void>();
