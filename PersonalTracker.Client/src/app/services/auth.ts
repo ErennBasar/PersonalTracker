@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl + '/auth';
+  private apiUrl = "https://personal-tracker-api-eren-egeaabb8hvcge6a5.italynorth-01.azurewebsites.net/api/auth";
 
   // O anki kullanıcıyı uygulamada her yerden erişilebilir yapıyoruz
   private currentUserSubject = new BehaviorSubject<AuthUser | null>(null);
