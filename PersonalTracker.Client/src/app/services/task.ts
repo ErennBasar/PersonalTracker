@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root',
 })
 export class TaskService {
+  // GÜNCELLEME KONTROL: 14 Aralık Saat 14:10
   private apiUrl = environment.apiUrl + '/Todo';
 
   // Bu bizim "Yenileme Zili"miz

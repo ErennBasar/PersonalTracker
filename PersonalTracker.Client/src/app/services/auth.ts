@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  // GÜNCELLEME KONTROL: 14 Aralık Saat 14:10
   private apiUrl = environment.apiUrl + '/auth';
 
   // O anki kullanıcıyı uygulamada her yerden erişilebilir yapıyoruz
