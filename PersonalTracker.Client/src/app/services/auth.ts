@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginRequest, RegisterRequest, AuthUser } from '../models/auth';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5256/api/auth';
+  private apiUrl = environment.apiUrl + '/auth';
 
   // O anki kullanıcıyı uygulamada her yerden erişilebilir yapıyoruz
   private currentUserSubject = new BehaviorSubject<AuthUser | null>(null);
