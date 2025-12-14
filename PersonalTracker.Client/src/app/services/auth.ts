@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = "https://personal-tracker-api-eren-egeaabb8hvcge6a5.italynorth-01.azurewebsites.net/api/auth";
+  private apiUrl = environment.apiUrl + '/auth';
 
   // O anki kullanıcıyı uygulamada her yerden erişilebilir yapıyoruz
   private currentUserSubject = new BehaviorSubject<AuthUser | null>(null);
@@ -20,7 +20,7 @@ export class AuthService {
     if (savedUser) {
       this.currentUserSubject.next(JSON.parse(savedUser));
     }
-  }
+ }
 
   login(request: LoginRequest): Observable<AuthUser> {
     return this.http.post<AuthUser>(`${this.apiUrl}/login`, request).pipe(

@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl + '/Todo';
 
   // Bu bizim "Yenileme Zili"miz
   private _refreshNeeded$ = new Subject<void>();
