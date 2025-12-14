@@ -14,10 +14,17 @@ builder.Services.AddDbContext<PersonalTrackerDeneme2DbContext>(options =>
 // builder.Services.AddDbContext<PersonalTrackerDeneme2DbContext>(options =>
 //     options.UseNpgsql(Configuration.ConnectionString));
 
+// builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+//     policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
+//         .AllowAnyHeader()
+//         .AllowAnyMethod()
+// ));
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
-    policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
-        .AllowAnyHeader()
-        .AllowAnyMethod()
+        policy
+            .SetIsOriginAllowed(origin => true)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials() 
 ));
 
 // Add services to the container.
