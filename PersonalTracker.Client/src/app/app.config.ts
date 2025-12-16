@@ -4,7 +4,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { routes } from './app.routes';
 
-import { provideHttpClient } from '@angular/common/http'; //servislerin çalışması için ekledik
+import { provideHttpClient } from '@angular/common/http';
+import {provideNativeDateAdapter} from '@angular/material/core'; //servislerin çalışması için ekledik
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideNativeDateAdapter()
   ]
 };
